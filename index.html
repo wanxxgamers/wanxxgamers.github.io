@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameStore - Jual Akun Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafa;
+      color: #333;
+      padding: 15px;
+      line-height: 1.6;
+    }
+
+    /* Header Logo */
+    header {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    /* Banner Slider */
+    .banner-container {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 180px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner-slider {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .banner-slide {
+      min-width: 100%;
+    }
+
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      color: white;
+      padding: 15px;
+    }
+
+    .slide-overlay h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .slide-overlay p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .indicators {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .indicator.active {
+      background: white;
+    }
+
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .left { left: 10px; }
+    .right { right: 10px; }
+
+    /* Section Title */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 25px 0 15px;
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .scroll-arrows button {
+      background: #e0e0e0;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      color: #555;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Product Slider */
+    .product-slider {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 10px 0 20px;
+      scroll-behavior: smooth;
+    }
+
+    .product-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product-slider {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .product-card {
+      min-width: 150px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s;
+      text-decoration: none; /* Hilangin garis dari link */
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      font-size: 15px;
+      font-weight: 500;
+      margin: 10px 10px 5px;
+      color: #333;
+      text-decoration: none; /* Pastikan no underline */
+    }
+
+    .price {
+      font-size: 14px;
+      color: #FF6B35; /* Oranye */
+      font-weight: 500;
+      margin: 0 10px 5px;
+    }
+
+    .views {
+      font-size: 12px;
+      color: #888;
+      margin: 0 10px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <header>
+    <img src="https://via.placeholder.com/100x40/2575fc/ffffff?text=GAMESTORE" alt="Logo GameStore" class="logo" />
+  </header>
+
+  <!-- Banner Slider -->
+  <section class="banner-container">
+    <div class="banner-slider" id="banner-slider">
+      <div class="banner-slide active">
+        <img src="https://via.placeholder.com/360x180/e6f2ff/2575fc?text=Flash+Sale+MLBB" alt="Flash Sale MLBB" />
+        <div class="slide-overlay">
+          <h2>Flash Sale 50%</h2>
+          <p>Akun MLBB Epic, harga spesial!</p>
+        </div>
+      </div>
+      <div class="banner-slide">
+        <img src="https://via.placeholder.com/360x180/f0f7ff/2575fc?text=Valorant+Account" alt="Valorant" />
+        <div class="slide-overlay">
+          <h2>Valorant Immortal</h2>
+          <p>Bisa ganti email, rank tinggi!</p>
+        </div>
+      </div>
+      <div class="banner-slide">
+        <img src="https://via.placeholder.com/360x180/f8f9fa/495057?text=Genshin+AR+60" alt="Genshin" />
+        <div class="slide-overlay">
+          <h2>Genshin Impact AR 60</h2>
+          <p>30+ karakter, siap main!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="indicators">
+      <span class="indicator active"></span>
+      <span class="indicator"></span>
+      <span class="indicator"></span>
+    </div>
+
+    <button class="slide-arrow left" id="prev-banner"><</button>
+    <button class="slide-arrow right" id="next-banner">></button>
+  </section>
+
+  <!-- Flash Sale -->
+  <section class="section-title">
+    <h2>🔥 Flash Sale</h2>
+    <div class="scroll-arrows">
+      <button id="prev-flash"><</button>
+      <button id="next-flash">></button>
+    </div>
+  </section>
+
+  <div class="product-slider" id="flash-slider">
+    <a href="detail.html" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/e6f2ff/2575fc?text=MLBB" alt="MLBB" />
+      <h3>MLBB Epic Rank</h3>
+      <p class="price">Rp 150.000</p>
+      <p class="views">Dilihat 20 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+Valorant" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/f0f7ff/2575fc?text=VALORANT" alt="Valorant" />
+      <h3>Valorant Immortal</h3>
+      <p class="price">Rp 250.000</p>
+      <p class="views">Dilihat 15 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+Genshin" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/f8f9fa/495057?text=GENSHIN" alt="Genshin" />
+      <h3>Genshin AR 60</h3>
+      <p class="price">Rp 300.000</p>
+      <p class="views">Dilihat 25 kali</p>
+    </a>
+  </div>
+
+  <!-- Semua Produk -->
+  <section class="section-title">
+    <h2>🎮 Semua Akun</h2>
+    <div class="scroll-arrows">
+      <button id="prev-all"><</button>
+      <button id="next-all">></button>
+    </div>
+  </section>
+
+  <div class="product-slider" id="all-slider">
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+Free+Fire" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/e6f2ff/2575fc?text=FREE+FIRE" alt="FF" />
+      <h3>FF Master Rank</h3>
+      <p class="price">Rp 100.000</p>
+      <p class="views">Dilihat 18 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+PUBG" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/f0f7ff/2575fc?text=PUBG" alt="PUBG" />
+      <h3>PUBG UC 5000+</h3>
+      <p class="price">Rp 200.000</p>
+      <p class="views">Dilihat 22 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+Ragnarok" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/f8f9fa/495057?text=RAGNAROK" alt="Ragnarok" />
+      <h3>Ragnarok Job 70</h3>
+      <p class="price">Rp 180.000</p>
+      <p class="views">Dilihat 30 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+COD" class="product-card" target="_blank">
+      <img src="https://via.placeholder.com/150x110/e6f2ff/2575fc?text=COD" alt="COD" />
+      <h3>COD MW2 Level 55</h3>
+      <p class="price">Rp 220.000</p>
+      <p class="views">Dilihat 12 kali</p>
+    </a>
+  </div>
+
+  <script>
+    // Banner Slider
+    const bannerSlider = document.getElementById("banner-slider");
+    const indicators = document.querySelectorAll(".indicator");
+    const prevBtn = document.getElementById("prev-banner");
+    const nextBtn = document.getElementById("next-banner");
+
+    let currentSlide = 0;
+    const totalSlides = indicators.length;
+
+    function updateBanner() {
+      bannerSlider.style.transform = translateX(-${currentSlide * 100}%);
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle("active", i === currentSlide);
+      });
+    }
+
+    indicators.forEach((indicator, i) => {
+      indicator.addEventListener("click", () => {
+        currentSlide = i;
+        updateBanner();
+      });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateBanner();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateBanner();
+    });
+
+    // Auto Slide
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateBanner();
+    }, 4000);
+
+    // Horizontal Scroll
+    document.getElementById("prev-flash").addEventListener("click", () => {
+      document.getElementById("flash-slider").scrollLeft -= 160;
+    });
+    document.getElementById("next-flash").addEventListener("click", () => {
+      document.getElementById("flash-slider").scrollLeft += 160;
+    });
+
+    document.getElementById("prev-all").addEventListener("click", () => {
+      document.getElementById("all-slider").scrollLeft -= 160;
+    });
+    document.getElementById("next-all").addEventListener("click", () => {
+      document.getElementById("all-slider").scrollLeft += 160;
+    });
+  </script>
+</body>
+</html>
