@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Akun MLBB | GameStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298, #6a11cb);
+      background-attachment: fixed;
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 15px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    .back-btn {
+      font-size: 24px;
+      color: #fff;
+      text-decoration: none;
+      margin-right: 12px;
+      transition: transform 0.2s;
+    }
+    .back-btn:hover {
+      transform: scale(1.1);
+    }
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .main-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .gallery {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .gallery::-webkit-scrollbar {
+      display: none;
+    }
+    .gallery img {
+      width: 85px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+    .gallery img.active {
+      border-color: #FFD700;
+      transform: scale(1.05);
+    }
+    .product-info {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .product-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .product-price {
+      font-size: 22px;
+      color: #FFD700;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .product-views {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 15px;
+    }
+    .account-details {
+      margin: 15px 0;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .detail-label {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .detail-value {
+      color: #fff;
+      text-align: right;
+    }
+    .description {
+      margin: 15px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+    }
+    .buy-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: #FFD700;
+      color: #1a1a2e;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 16px;
+      text-decoration: none;
+      margin: 25px 0;
+      box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    .buy-btn:hover {
+      background: #FFC107;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+    }
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+    }
+    @media (max-width: 600px) {
+      .main-image { height: 200px; }
+      .container { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+      <div class="page-title">KEMBALI</div>
+    </div>
+
+    <img src="https://storage.googleapis.com/mitustore/test/1729243971_12%20  (3).webp" alt="Mobile Legends" class="main-image" id="mainImage" />
+
+    <div class="gallery">
+      <img src="https://storage.googleapis.com/mitustore/test/1729314707_39.webp" alt="Rank" class="active" onclick="changeMainImage(this)">
+      <img src="https://via.placeholder.com/80x80/f8f9fa/495057?text=Hero" alt="Hero" onclick="changeMainImage(this)">
+      <img src="https://via.placeholder.com/80x80/f0f7ff/FF6B35?text=Skin" alt="Skin" onclick="changeMainImage(this)">
+      <img src="https://via.placeholder.com/80x80/e8f5e8/2e7d32?text=Login" alt="Login" onclick="changeMainImage(this)">
+    </div>
+
+    <div class="product-info">
+      <h2 class="product-title">Akun Mobile Legends Epic Rank, 50 Hero</h2>
+      <div class="product-price">Rp 150.000</div>
+      <div class="product-views">Dilihat 24 kali</div>
+
+      <div class="account-details">
+        <div class="detail-row">
+          <span class="detail-label">Game</span>
+          <span class="detail-value">Mobile Legends</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Rank</span>
+          <span class="detail-value">Epic</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Jumlah Hero</span>
+          <span class="detail-value">50 Hero</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Skin</span>
+          <span class="detail-value">15 Skin Limited</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Tipe Akun</span>
+          <span class="detail-value">Original (Bisa Ganti Email)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Harga</span>
+          <span class="detail-value">Rp 150.000</span>
+        </div>
+      </div>
+
+      <div class="description">
+        <strong>Deskripsi:</strong><br>
+        Akun MLBB lama, sudah main 2 tahun. Banyak hero dan skin langka. 
+        Bisa ganti email & password. Tidak pernah kena banned. 
+        Siap kirim data setelah pembayaran.
+      </div>
+    </div>
+
+    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+MLBB+Epic+Rank" class="buy-btn" target="_blank">
+      <i class="fab fa-whatsapp"></i> Beli Sekarang via WhatsApp
+    </a>
+
+    <footer>
+      &copy; 2025 GameStore. Semua akun diverifikasi.
+    </footer>
+  </div>
+
+  <script>
+    function changeMainImage(el) {
+      document.getElementById("mainImage").src = el.src.trim();
+      document.querySelectorAll(".gallery img").forEach(img => {
+        img.classList.remove("active");
+      });
+      el.classList.add("active");
+    }
+  </script>
+</body>
+</html>
