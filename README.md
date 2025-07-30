@@ -1,1 +1,1 @@
-# wanxxgamers.github.io
+# wanxxgame.my.id
