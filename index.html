@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GameStore - Jual Akun Games Keren</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>WANXX GAMES - Platfrom Jual Akun Games Termurah Se-indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     /* Reset */
@@ -36,52 +36,61 @@
       height: 50px;
       filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
     }
-    .nav-icons i {
-      font-size: 20px;
-      color: #fff;
-      opacity: 0.8;
-      transition: 0.3s;
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .nav-icons i:hover {
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: 0.3s;
+      border-radius: 16px;
+      padding: 4px 8px;
+    }
+    .lang-btn:hover {
       opacity: 1;
-      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .lang-btn.active {
+      opacity: 1;
+      font-weight: 600;
+      background: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+    }
+    .lang-btn img {
+      width: 20px;
+      height: 15px;
+      border-radius: 2px;
     }
 
-    /* Search Bar with Icon */
-    .search-container {
-      position: relative;
-      margin: 15px 0 25px;
-    }
-    .search-container input {
-      width: 100%;
-      padding: 14px 20px;
-      padding-left: 50px;
-      border: none;
-      border-radius: 16px;
+    /* Search Box (Icon Only) */
+    .search-box {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 14px;
       color: white;
-      font-size: 15px;
-      outline: none;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
       transition: all 0.3s;
+      margin: 15px 0 25px;
     }
-    .search-container input::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-    .search-container input:focus {
+    .search-box:hover {
       background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-    }
-    .search-container i {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9ca3af;
+      transform: scale(1.02);
     }
 
-    /* Banner */
+    /* Banner Slider - Fixed Cropping */
     .banner-container {
       position: relative;
       border-radius: 20px;
@@ -90,13 +99,17 @@
       margin-bottom: 30px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: #0f1a2b;
     }
     .banner-slider {
       display: flex;
       width: 100%;
       height: 100%;
       transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      flex-shrink: 0;
+    }
+    .banner-slide {
+      min-width: 100%;
+      position: relative;
     }
     .banner-slide img {
       width: 100%;
@@ -122,19 +135,6 @@
     .slide-overlay p {
       font-size: 14px;
       opacity: 0.9;
-    }
-    .badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #3b82f6;
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 5px 10px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     /* Indikator */
@@ -246,7 +246,6 @@
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      position: relative;
     }
     .product-card:hover {
       transform: translateY(-10px) scale(1.05);
@@ -281,50 +280,73 @@
       margin: 0 14px 14px;
     }
 
-    /* Popup Hasil Pencarian */
+    /* Search Popup Fullscreen */
     .search-popup {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 500px;
+      inset: 0;
       background: rgba(15, 25, 40, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(59, 130, 246, 0.4);
-      color: white;
+      backdrop-filter: blur(10px);
       z-index: 1000;
       display: none;
-      animation: fadeIn 0.4s ease;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -40%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
+    .search-popup.active {
+      display: flex;
     }
-    .search-popup h3 {
+    .search-popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .search-popup-header h3 {
       font-size: 18px;
-      margin-bottom: 15px;
       color: #60a5fa;
-      text-align: center;
+    }
+    .close-search {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .search-popup input {
+      width: 100%;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+    .search-results {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
     .search-result-item {
       display: flex;
       gap: 12px;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 12px;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s;
     }
-    .search-result-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
+    .search-result-item:hover {
+      background: rgba(59, 130, 246, 0.2);
+      transform: scale(1.02);
     }
     .search-result-item img {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 12px;
       object-fit: cover;
     }
@@ -342,24 +364,133 @@
       font-size: 11px;
       color: rgba(255, 255, 255, 0.6);
     }
-    .close-popup {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: none;
-      border: none;
-      color: #ef4444;
-      font-size: 20px;
+
+    /* Live Chat Floating */
+    .live-chat-container {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+    }
+    .chat-toggle {
+      width: 60px;
+      height: 60px;
+      background: #3b82f6;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
       cursor: pointer;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+    .chat-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    .chat-widget {
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 320px;
+      max-width: 90vw;
+      background: rgba(15, 25, 40, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      overflow: hidden;
+      display: none;
+      animation: fadeInUp 0.4s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: rgba(59, 130, 246, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .text-green {
+      color: #10b981;
+      font-size: 10px;
+    }
+    .chat-body {
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #e0e7ff;
+    }
+    .chat-body p {
+      margin: 4px 0;
+    }
+    .chat-time {
+      text-align: right;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 8px;
+    }
+    .chat-footer {
+      padding: 16px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .chat-wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+    .chat-wa-btn:hover {
+      background: #0d9d6e;
+      transform: scale(1.03);
     }
 
-    /* Overlay gelap saat popup muncul */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 999;
-      display: none;
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    footer a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
 
     /* Responsive */
@@ -373,62 +504,60 @@
         height: 40px;
         font-size: 16px;
       }
-      .search-container input { font-size: 14px; }
+      .live-chat-container {
+        bottom: 20px;
+        right: 20px;
+      }
+      .chat-toggle {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
+      }
     }
     @media (min-width: 768px) {
       body { padding: 30px; }
       .banner-container { height: 240px; }
       .product-card { min-width: 175px; }
       .product-slider { gap: 22px; }
-      .search-container input {
-        max-width: 500px;
-        margin: 0 auto;
-      }
     }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
-    <img src="https://via.placeholder.com/140x50/1e40af/ffffff?text=GAMESTORE+" alt="Logo GameStore" class="logo" />
-    <div class="nav-icons">
-      <i class="fas fa-bell"></i>
-      <i class="fas fa-user-circle"></i>
+    <img src="https://wanxxgame.com/storage/banners/4ZtCeYOoYyBUqIr7crTDJczTr4R7apgmZo5B4rxc.png" alt="WANXX GAMES" class="logo" />
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="id" id="btn-id">
+        <img src="https://flagcdn.com/id.svg" alt="Bahasa Indonesia" width="20">
+      </button>
+      <button class="lang-btn" data-lang="en" id="btn-en">
+        <img src="https://flagcdn.com/gb.svg" alt="English" width="20">
+      </button>
     </div>
   </header>
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <i class="fas fa-search"></i>
-    <input type="text" id="search-input" placeholder="🔍 Cari akun murah, MLBB, Valorant, dll..." />
+  <!-- Search Box (Icon Only) -->
+  <div class="search-box" id="search-toggle">
+    <i class="fas fa-search"></i> Cari Akun Game
   </div>
 
   <!-- Banner Slider -->
   <section class="banner-container">
     <div class="banner-slider" id="banner-slider">
       <div class="banner-slide active">
-        <img src="https://wanxxgame.com/storage/banners/EoQfEx6ZHM9rU3taAPdJ36mJAuytHUuw4mPxQjGE.png" alt="Flash Sale MLBB" />
+        <img src="https://wanxxgame.com/storage/banners/6kqFb78sJEWjcbUj38xllq6FhSwUA4uBnPLKgTqF.png" alt="Flash Sale MLBB" />
         <div class="slide-overlay">
-          <h2>Flash Sale 50%</h2>
-          <p>Akun MLBB Epic, harga spesial!</p>
         </div>
-        <div class="badge">PROMO</div>
       </div>
       <div class="banner-slide">
-        <img src="https://via.placeholder.com/360x180/7c3aed/ffffff?text=VALORANT+IMMORTAL" alt="Valorant" />
+        <img src="https://wanxxgame.com/storage/banners/3p000yeEOqZon2NnkAltv1Ky2e8JYBHYujlpf1Zn.png" alt="Valorant" />
         <div class="slide-overlay">
-          <h2>Valorant Immortal</h2>
-          <p>Bisa ganti email, rank tinggi!</p>
         </div>
-        <div class="badge">BEST SELLER</div>
       </div>
       <div class="banner-slide">
-        <img src="https://via.placeholder.com/360x180/065f46/ffffff?text=GENSHIN+AR+60" alt="Genshin" />
+        <img src="https://wanxxgame.com/storage/banners/Da8CNulH7mlSRG4YFLnyQOYXUgyS9LtDtNB0eoUp.png" alt="Genshin" />
         <div class="slide-overlay">
-          <h2>Genshin Impact AR 60</h2>
-          <p>30+ karakter, siap main!</p>
         </div>
-        <div class="badge">NEW</div>
       </div>
     </div>
     <div class="indicators">
@@ -442,28 +571,28 @@
 
   <!-- Flash Sale -->
   <section class="section-title">
-    <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
+    <h2><i class="fas fa-bolt"></i> <span id="flash-title">Flash Sale</span></h2>
     <div class="scroll-arrows">
       <button id="prev-flash"><i class="fas fa-chevron-left"></i></button>
       <button id="next-flash"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
   <div class="product-slider" id="flash-slider">
-    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+MLBB" class="product-card" data-name="MLBB Epic Rank" target="_blank">
+    <a href="detailf1.html" class="product-card" data-name="MLBB Epic Rank" target="_blank">
       <img src="https://via.placeholder.com/150x110/1e40af/ffffff?text=MLBB" alt="MLBB" />
-      <h3>MLBB Epic Rank</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 150.000</p>
       <p class="views">Dilihat 20 kali</p>
     </a>
-    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+Valorant" class="product-card" data-name="Valorant Immortal" target="_blank">
+    <a href="detailf2.html" class="product-card" data-name="Valorant Immortal" target="_blank">
       <img src="https://via.placeholder.com/150x110/7c3aed/ffffff?text=VALORANT" alt="Valorant" />
-      <h3>Valorant Immortal</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 250.000</p>
       <p class="views">Dilihat 15 kali</p>
     </a>
-    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+Genshin" class="product-card" data-name="Genshin AR 60" target="_blank">
+    <a href="detailf3.html" class="product-card" data-name="Genshin AR 60" target="_blank">
       <img src="https://via.placeholder.com/150x110/065f46/ffffff?text=GENSHIN" alt="Genshin" />
-      <h3>Genshin AR 60</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 300.000</p>
       <p class="views">Dilihat 25 kali</p>
     </a>
@@ -471,52 +600,80 @@
 
   <!-- Semua Produk -->
   <section class="section-title">
-    <h2><i class="fas fa-gamepad"></i> Semua Akun</h2>
+    <h2><i class="fas fa-gamepad"></i> <span id="all-title">Semua Akun</span></h2>
     <div class="scroll-arrows">
       <button id="prev-all"><i class="fas fa-chevron-left"></i></button>
       <button id="next-all"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
   <div class="product-slider" id="all-slider">
-    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+Free+Fire" class="product-card" data-name="FF Master Rank" target="_blank">
+    <a href="detail1.html" class="product-card" data-name="akun free fire" target="_blank">
       <img src="https://via.placeholder.com/150x110/1e40af/ffffff?text=FREE+FIRE" alt="FF" />
-      <h3>FF Master Rank</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 100.000</p>
       <p class="views">Dilihat 18 kali</p>
     </a>
-    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+PUBG" class="product-card" data-name="PUBG UC 5000+" target="_blank">
+    <a href="detail2.html" class="product-card" data-name="PUBG UC 5000+" target="_blank">
       <img src="https://via.placeholder.com/150x110/7c3aed/ffffff?text=PUBG" alt="PUBG" />
-      <h3>PUBG UC 5000+</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 200.000</p>
       <p class="views">Dilihat 22 kali</p>
     </a>
-    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+Ragnarok" class="product-card" data-name="Ragnarok Job 70" target="_blank">
+    <a href="detail3.html" class="product-card" data-name="Ragnarok Job 70" target="_blank">
       <img src="https://via.placeholder.com/150x110/374151/ffffff?text=RAGNAROK" alt="Ragnarok" />
-      <h3>Ragnarok Job 70</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 180.000</p>
       <p class="views">Dilihat 30 kali</p>
     </a>
-    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+COD" class="product-card" data-name="COD MW2 Level 55" target="_blank">
+    <a href="detail4.html" class="product-card" data-name="COD MW2 Level 55" target="_blank">
       <img src="https://via.placeholder.com/150x110/dc2626/ffffff?text=COD" alt="COD" />
-      <h3>COD MW2 Level 55</h3>
+      <h3>Akun Free Fire</h3>
       <p class="price">Rp 220.000</p>
       <p class="views">Dilihat 12 kali</p>
     </a>
   </div>
 
-  <!-- Overlay & Popup -->
-  <div class="overlay" id="overlay"></div>
-  <div class="search-popup" id="search-popup">
-    <button class="close-popup" id="close-popup">&times;</button>
-    <h3><i class="fas fa-search"></i> Hasil Pencarian</h3>
-    <div id="search-results"></div>
-  </div>
-
   <!-- Footer -->
   <footer>
-    <p>© 2025 <strong>GameStore+</strong> | Jual Akun Game Terpercaya</p>
-    <p><a href="https://wa.me/6281234567890">Hubungi Kami</a> | <a href="#">Kebijakan Privasi</a></p>
+    <p>© 2025 <strong>WANXX GAMES</strong> | <span id="footer-text">Jual Akun Game Terpercaya</span></p>
+    <p><a href="https://wa.me/6283134115994">Hubungi Kami</a> | <a href="#">Kebijakan Privasi</a></p>
   </footer>
+
+  <!-- Search Popup -->
+  <div class="search-popup" id="search-popup">
+    <div class="search-popup-header">
+      <h3><i class="fas fa-search"></i> <span id="search-title">Cari Akun Game</span></h3>
+      <button class="close-search" id="close-search">&times;</button>
+    </div>
+    <input type="text" id="search-input" placeholder="Ketik nama game..." />
+    <div class="search-results" id="search-results"></div>
+  </div>
+
+  <!-- Live Chat WhatsApp -->
+  <div class="live-chat-container">
+    <div class="chat-toggle" id="chat-toggle">
+      <i class="fas fa-comment-dots"></i>
+    </div>
+    <div class="chat-widget" id="chat-widget">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <i class="fas fa-circle text-green"></i>
+          <span>Live Support</span>
+        </div>
+        <i class="fas fa-times chat-close" id="chat-close"></i>
+      </div>
+      <div class="chat-body">
+        <p><strong>CS WANXX GAMES</strong></p>
+        <p>Halo! Ada yang bisa dibantu? 🎮</p>
+        <p class="chat-time">13:45</p>
+      </div>
+      <div class="chat-footer">
+        <button id="wa-button" class="chat-wa-btn">
+          <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // === BANNER SLIDER ===
@@ -570,19 +727,29 @@
       document.getElementById("all-slider").scrollLeft += 180;
     });
 
-    // === SEARCH FUNCTION ===
-    const searchInput = document.getElementById("search-input");
+    // === SEARCH POPUP ===
+    const searchToggle = document.getElementById("search-toggle");
     const searchPopup = document.getElementById("search-popup");
+    const closeSearch = document.getElementById("close-search");
+    const searchInput = document.getElementById("search-input");
     const searchResults = document.getElementById("search-results");
-    const overlay = document.getElementById("overlay");
-    const closePopup = document.getElementById("close-popup");
     const products = document.querySelectorAll(".product-card");
+
+    searchToggle.addEventListener("click", () => {
+      searchPopup.classList.add("active");
+      setTimeout(() => searchInput.focus(), 300);
+    });
+
+    closeSearch.addEventListener("click", () => {
+      searchPopup.classList.remove("active");
+      searchInput.value = "";
+      searchResults.innerHTML = "";
+    });
 
     searchInput.addEventListener("input", () => {
       const query = searchInput.value.toLowerCase().trim();
       if (query === "") {
-        searchPopup.style.display = "none";
-        overlay.style.display = "none";
+        searchResults.innerHTML = "";
         return;
       }
 
@@ -600,8 +767,8 @@
         }
       });
 
+      searchResults.innerHTML = "";
       if (results.length > 0) {
-        searchResults.innerHTML = "";
         results.forEach(res => {
           const item = document.createElement("a");
           item.href = res.link;
@@ -617,23 +784,77 @@
           `;
           searchResults.appendChild(item);
         });
-        searchPopup.style.display = "block";
-        overlay.style.display = "block";
       } else {
-        searchResults.innerHTML = `<p style="color: #9ca3af; font-size: 14px;">Tidak ada akun ditemukan.</p>`;
-        searchPopup.style.display = "block";
-        overlay.style.display = "block";
+        searchResults.innerHTML = `<p style="color: #9ca3af; text-align: center; width: 100%;">Tidak ada akun ditemukan.</p>`;
       }
     });
 
-    // Tutup popup
-    closePopup.addEventListener("click", () => {
-      searchPopup.style.display = "none";
-      overlay.style.display = "none";
+    // === LANGUAGE SWITCHER ===
+    const btnId = document.getElementById("btn-id");
+    const btnEn = document.getElementById("btn-en");
+
+    const translations = {
+      id: {
+        "flash-title": "Flash Sale",
+        "all-title": "Semua Akun",
+        "footer-text": "Jual Akun Game Terpercaya",
+        "search-title": "Cari Akun Game",
+        "banner-title-1": "Flash Sale 50%",
+        "banner-desc-1": "Akun MLBB Epic, harga spesial!",
+        "banner-title-2": "Valorant Immortal",
+        "banner-desc-2": "Bisa ganti email, rank tinggi!",
+        "banner-title-3": "Genshin Impact AR 60",
+        "banner-desc-3": "30+ karakter, siap main!"
+      },
+      en: {
+        "flash-title": "Flash Sale",
+        "all-title": "All Accounts",
+        "footer-text": "Trusted Game Account Seller",
+        "search-title": "Search Game Account",
+        "banner-title-1": "Flash Sale 50%",
+        "banner-desc-1": "MLBB Epic account, special price!",
+        "banner-title-2": "Valorant Immortal",
+        "banner-desc-2": "Can change email, high rank!",
+        "banner-title-3": "Genshin Impact AR 60",
+        "banner-desc-3": "30+ characters, ready to play!"
+      }
+    };
+
+    function setLanguage(lang) {
+      Object.keys(translations[lang]).forEach(key => {
+        const el = document.getElementById(key);
+        if (el) el.textContent = translations[lang][key];
+      });
+      btnId.classList.toggle("active", lang === "id");
+      btnEn.classList.toggle("active", lang === "en");
+    }
+
+    btnId.addEventListener("click", () => setLanguage("id"));
+    btnEn.addEventListener("click", () => setLanguage("en"));
+
+    // Default language
+    setLanguage("id");
+
+    // === LIVE CHAT ===
+    const chatToggle = document.getElementById("chat-toggle");
+    const chatWidget = document.getElementById("chat-widget");
+    const chatClose = document.getElementById("chat-close");
+    const waButton = document.getElementById("wa-button");
+
+    chatToggle.addEventListener("click", () => {
+      if (chatWidget.style.display === "block") {
+        chatWidget.style.display = "none";
+      } else {
+        chatWidget.style.display = "block";
+      }
     });
-    overlay.addEventListener("click", () => {
-      searchPopup.style.display = "none";
-      overlay.style.display = "none";
+
+    chatClose.addEventListener("click", () => {
+      chatWidget.style.display = "none";
+    });
+
+    waButton.addEventListener("click", () => {
+      window.open("https://wa.me/6283134115994?text=Halo%20Admin,%20saya%20butuh%20bantuan", "_blank");
     });
   </script>
 </body>
