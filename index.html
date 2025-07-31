@@ -1,1 +1,640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameStore - Jual Akun Games Keren</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0b1a3a, #1e3c72, #2a5298);
+      background-attachment: fixed;
+      color: #fff;
+      padding: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+    .logo {
+      height: 50px;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+    }
+    .nav-icons i {
+      font-size: 20px;
+      color: #fff;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+    .nav-icons i:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    /* Search Bar with Icon */
+    .search-container {
+      position: relative;
+      margin: 15px 0 25px;
+    }
+    .search-container input {
+      width: 100%;
+      padding: 14px 20px;
+      padding-left: 50px;
+      border: none;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s;
+    }
+    .search-container input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .search-container input:focus {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    }
+    .search-container i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+    }
+
+    /* Banner */
+    .banner-container {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 200px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0f1a2b;
+    }
+    .banner-slider {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.95;
+    }
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+      padding: 24px;
+      color: white;
+    }
+    .slide-overlay h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
+    .slide-overlay p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #3b82f6;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Indikator */
+    .indicators {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .indicator.active {
+      background: #60a5fa;
+      transform: scale(1.3);
+      box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+    }
+
+    /* Panah Banner */
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(15, 25, 40, 0.7);
+      backdrop-filter: blur(8px);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .slide-arrow:hover {
+      background: #2563eb;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .left { left: 14px; }
+    .right { right: 14px; }
+
+    /* Section Title */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0 18px;
+    }
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #e0e7ff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* Scroll Button */
+    .scroll-arrows button {
+      background: rgba(59, 130, 246, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .scroll-arrows button:hover {
+      background: #3b82f6;
+      transform: scale(1.08);
+    }
+
+    /* Product Card */
+    .product-slider {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 10px 0 20px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .product-slider::-webkit-scrollbar {
+      display: none;
+    }
+    .product-card {
+      min-width: 165px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    .product-card img {
+      width: 100%;
+      height: 115px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .product-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 12px 14px 6px;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .price {
+      font-size: 16px;
+      color: #60a5fa;
+      font-weight: 700;
+      margin: 0 14px 5px;
+    }
+    .views {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0 14px 14px;
+    }
+
+    /* Popup Hasil Pencarian */
+    .search-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 500px;
+      background: rgba(15, 25, 40, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: white;
+      z-index: 1000;
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -40%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    .search-popup h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #60a5fa;
+      text-align: center;
+    }
+    .search-result-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .search-result-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .search-result-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .search-result-info h4 {
+      font-size: 15px;
+      margin: 0 0 4px;
+      color: white;
+    }
+    .search-result-info .price {
+      font-size: 14px;
+      color: #60a5fa;
+      font-weight: 600;
+    }
+    .search-result-info .views {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .close-popup {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Overlay gelap saat popup muncul */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .banner-container { height: 170px; }
+      .section-title h2 { font-size: 19px; }
+      .product-card { min-width: 150px; }
+      .slide-arrow, .scroll-arrows button {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      .search-container input { font-size: 14px; }
+    }
+    @media (min-width: 768px) {
+      body { padding: 30px; }
+      .banner-container { height: 240px; }
+      .product-card { min-width: 175px; }
+      .product-slider { gap: 22px; }
+      .search-container input {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="https://via.placeholder.com/140x50/1e40af/ffffff?text=GAMESTORE+" alt="Logo GameStore" class="logo" />
+    <div class="nav-icons">
+      <i class="fas fa-bell"></i>
+      <i class="fas fa-user-circle"></i>
+    </div>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <i class="fas fa-search"></i>
+    <input type="text" id="search-input" placeholder="🔍 Cari akun murah, MLBB, Valorant, dll..." />
+  </div>
+
+  <!-- Banner Slider -->
+  <section class="banner-container">
+    <div class="banner-slider" id="banner-slider">
+      <div class="banner-slide active">
+        <img src="https://wanxxgame.com/storage/banners/EoQfEx6ZHM9rU3taAPdJ36mJAuytHUuw4mPxQjGE.png" alt="Flash Sale MLBB" />
+        <div class="slide-overlay">
+          <h2>Flash Sale 50%</h2>
+          <p>Akun MLBB Epic, harga spesial!</p>
+        </div>
+        <div class="badge">PROMO</div>
+      </div>
+      <div class="banner-slide">
+        <img src="https://via.placeholder.com/360x180/7c3aed/ffffff?text=VALORANT+IMMORTAL" alt="Valorant" />
+        <div class="slide-overlay">
+          <h2>Valorant Immortal</h2>
+          <p>Bisa ganti email, rank tinggi!</p>
+        </div>
+        <div class="badge">BEST SELLER</div>
+      </div>
+      <div class="banner-slide">
+        <img src="https://via.placeholder.com/360x180/065f46/ffffff?text=GENSHIN+AR+60" alt="Genshin" />
+        <div class="slide-overlay">
+          <h2>Genshin Impact AR 60</h2>
+          <p>30+ karakter, siap main!</p>
+        </div>
+        <div class="badge">NEW</div>
+      </div>
+    </div>
+    <div class="indicators">
+      <span class="indicator active"></span>
+      <span class="indicator"></span>
+      <span class="indicator"></span>
+    </div>
+    <button class="slide-arrow left" id="prev-banner"><i class="fas fa-chevron-left"></i></button>
+    <button class="slide-arrow right" id="next-banner"><i class="fas fa-chevron-right"></i></button>
+  </section>
+
+  <!-- Flash Sale -->
+  <section class="section-title">
+    <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
+    <div class="scroll-arrows">
+      <button id="prev-flash"><i class="fas fa-chevron-left"></i></button>
+      <button id="next-flash"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </section>
+  <div class="product-slider" id="flash-slider">
+    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+MLBB" class="product-card" data-name="MLBB Epic Rank" target="_blank">
+      <img src="https://via.placeholder.com/150x110/1e40af/ffffff?text=MLBB" alt="MLBB" />
+      <h3>MLBB Epic Rank</h3>
+      <p class="price">Rp 150.000</p>
+      <p class="views">Dilihat 20 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+Valorant" class="product-card" data-name="Valorant Immortal" target="_blank">
+      <img src="https://via.placeholder.com/150x110/7c3aed/ffffff?text=VALORANT" alt="Valorant" />
+      <h3>Valorant Immortal</h3>
+      <p class="price">Rp 250.000</p>
+      <p class="views">Dilihat 15 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+mau+beli+akun+Genshin" class="product-card" data-name="Genshin AR 60" target="_blank">
+      <img src="https://via.placeholder.com/150x110/065f46/ffffff?text=GENSHIN" alt="Genshin" />
+      <h3>Genshin AR 60</h3>
+      <p class="price">Rp 300.000</p>
+      <p class="views">Dilihat 25 kali</p>
+    </a>
+  </div>
+
+  <!-- Semua Produk -->
+  <section class="section-title">
+    <h2><i class="fas fa-gamepad"></i> Semua Akun</h2>
+    <div class="scroll-arrows">
+      <button id="prev-all"><i class="fas fa-chevron-left"></i></button>
+      <button id="next-all"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </section>
+  <div class="product-slider" id="all-slider">
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+Free+Fire" class="product-card" data-name="FF Master Rank" target="_blank">
+      <img src="https://via.placeholder.com/150x110/1e40af/ffffff?text=FREE+FIRE" alt="FF" />
+      <h3>FF Master Rank</h3>
+      <p class="price">Rp 100.000</p>
+      <p class="views">Dilihat 18 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+PUBG" class="product-card" data-name="PUBG UC 5000+" target="_blank">
+      <img src="https://via.placeholder.com/150x110/7c3aed/ffffff?text=PUBG" alt="PUBG" />
+      <h3>PUBG UC 5000+</h3>
+      <p class="price">Rp 200.000</p>
+      <p class="views">Dilihat 22 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+Ragnarok" class="product-card" data-name="Ragnarok Job 70" target="_blank">
+      <img src="https://via.placeholder.com/150x110/374151/ffffff?text=RAGNAROK" alt="Ragnarok" />
+      <h3>Ragnarok Job 70</h3>
+      <p class="price">Rp 180.000</p>
+      <p class="views">Dilihat 30 kali</p>
+    </a>
+    <a href="https://wa.me/6281234567890?text=Saya+tertarik+akun+COD" class="product-card" data-name="COD MW2 Level 55" target="_blank">
+      <img src="https://via.placeholder.com/150x110/dc2626/ffffff?text=COD" alt="COD" />
+      <h3>COD MW2 Level 55</h3>
+      <p class="price">Rp 220.000</p>
+      <p class="views">Dilihat 12 kali</p>
+    </a>
+  </div>
+
+  <!-- Overlay & Popup -->
+  <div class="overlay" id="overlay"></div>
+  <div class="search-popup" id="search-popup">
+    <button class="close-popup" id="close-popup">&times;</button>
+    <h3><i class="fas fa-search"></i> Hasil Pencarian</h3>
+    <div id="search-results"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 <strong>GameStore+</strong> | Jual Akun Game Terpercaya</p>
+    <p><a href="https://wa.me/6281234567890">Hubungi Kami</a> | <a href="#">Kebijakan Privasi</a></p>
+  </footer>
+
+  <script>
+    // === BANNER SLIDER ===
+    const bannerSlider = document.getElementById("banner-slider");
+    const indicators = document.querySelectorAll(".indicator");
+    const prevBtn = document.getElementById("prev-banner");
+    const nextBtn = document.getElementById("next-banner");
+    let currentSlide = 0;
+    const totalSlides = indicators.length;
+
+    function updateBanner() {
+      bannerSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle("active", i === currentSlide);
+      });
+    }
+
+    indicators.forEach((indicator, i) => {
+      indicator.addEventListener("click", () => {
+        currentSlide = i;
+        updateBanner();
+      });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateBanner();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateBanner();
+    });
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateBanner();
+    }, 4000);
+
+    // === SCROLL BUTTONS ===
+    document.getElementById("prev-flash").addEventListener("click", () => {
+      document.getElementById("flash-slider").scrollLeft -= 180;
+    });
+    document.getElementById("next-flash").addEventListener("click", () => {
+      document.getElementById("flash-slider").scrollLeft += 180;
+    });
+    document.getElementById("prev-all").addEventListener("click", () => {
+      document.getElementById("all-slider").scrollLeft -= 180;
+    });
+    document.getElementById("next-all").addEventListener("click", () => {
+      document.getElementById("all-slider").scrollLeft += 180;
+    });
+
+    // === SEARCH FUNCTION ===
+    const searchInput = document.getElementById("search-input");
+    const searchPopup = document.getElementById("search-popup");
+    const searchResults = document.getElementById("search-results");
+    const overlay = document.getElementById("overlay");
+    const closePopup = document.getElementById("close-popup");
+    const products = document.querySelectorAll(".product-card");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+      if (query === "") {
+        searchPopup.style.display = "none";
+        overlay.style.display = "none";
+        return;
+      }
+
+      const results = [];
+      products.forEach(product => {
+        const name = product.getAttribute("data-name").toLowerCase();
+        if (name.includes(query)) {
+          results.push({
+            name: product.getAttribute("data-name"),
+            price: product.querySelector(".price").textContent,
+            views: product.querySelector(".views").textContent,
+            img: product.querySelector("img").src,
+            link: product.href
+          });
+        }
+      });
+
+      if (results.length > 0) {
+        searchResults.innerHTML = "";
+        results.forEach(res => {
+          const item = document.createElement("a");
+          item.href = res.link;
+          item.target = "_blank";
+          item.className = "search-result-item";
+          item.innerHTML = `
+            <img src="${res.img}" alt="${res.name}">
+            <div class="search-result-info">
+              <h4>${res.name}</h4>
+              <div class="price">${res.price}</div>
+              <div class="views">${res.views}</div>
+            </div>
+          `;
+          searchResults.appendChild(item);
+        });
+        searchPopup.style.display = "block";
+        overlay.style.display = "block";
+      } else {
+        searchResults.innerHTML = `<p style="color: #9ca3af; font-size: 14px;">Tidak ada akun ditemukan.</p>`;
+        searchPopup.style.display = "block";
+        overlay.style.display = "block";
+      }
+    });
+
+    // Tutup popup
+    closePopup.addEventListener("click", () => {
+      searchPopup.style.display = "none";
+      overlay.style.display = "none";
+    });
+    overlay.addEventListener("click", () => {
+      searchPopup.style.display = "none";
+      overlay.style.display = "none";
+    });
+  </script>
+</body>
+</html>
