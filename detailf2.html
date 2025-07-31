@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Akun Free Fire | WANXX GAMES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0b1a3a, #1e3c72, #2a5298);
+      background-attachment: fixed;
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    .back-btn {
+      font-size: 24px;
+      color: #60a5fa;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .back-btn:hover {
+      background: rgba(59, 130, 246, 0.2);
+      transform: scale(1.05);
+      color: #3b82f6;
+    }
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #e0e7ff;
+      margin-left: 12px;
+    }
+
+    /* Main Image */
+    .main-image {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Gallery */
+    .gallery {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 25px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .gallery::-webkit-scrollbar {
+      display: none;
+    }
+    .gallery img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery img.active {
+      border-color: #3b82f6;
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Product Info */
+    .product-info {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 25px;
+    }
+    .product-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .product-price {
+      font-size: 24px;
+      color: #60a5fa;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .product-views {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 16px;
+    }
+
+    /* Account Details */
+    .account-details {
+      margin: 20px 0;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 15px;
+    }
+    .detail-label {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .detail-value {
+      color: #fff;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    /* Description */
+    .description {
+      margin: 20px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 16px;
+      border-radius: 14px;
+      border-left: 4px solid #3b82f6;
+    }
+    .description strong {
+      color: #ffffff;
+    }
+
+    /* Tombol Beli Sekarang */
+    .buy-btn {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 18px;
+      text-decoration: none;
+      margin: 25px 0 12px;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .buy-btn:hover {
+      background: linear-gradient(135deg, #0d9d6e, #047857);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(16, 185, 129, 0.6);
+    }
+
+    /* Tombol Nego */
+    .nego-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      color: #3b82f6;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 16px;
+      text-decoration: none;
+      margin-bottom: 25px;
+      border: 2px solid #3b82f6;
+      transition: all 0.3s ease;
+    }
+    .nego-btn:hover {
+      background: rgba(59, 130, 246, 0.1);
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+    .nego-btn i {
+      margin-right: 6px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+    }
+    footer a {
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+        border-radius: 16px;
+      }
+      .main-image {
+        height: 220px;
+      }
+      .product-title {
+        font-size: 18px;
+      }
+      .buy-btn {
+        padding: 16px;
+        font-size: 16px;
+      }
+      .nego-btn {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <div class="page-title">Detail Akun Free Fire</div>
+    </div>
+
+    <!-- Main Image -->
+    <img src="https://wanxxgame.com/storage/banners/Jhe7ENPOWQ6zYhRmOummFAy0JAUmVMMqA7X9wUdv.png" alt="Free Fire" class="main-image" id="mainImage" />
+
+    <!-- Gallery -->
+    <div class="gallery">
+      <img src="https://wanxxgame.com/storage/banners/Jhe7ENPOWQ6zYhRmOummFAy0JAUmVMMqA7X9wUdv.png" alt="1" class="active" onclick="changeMainImage(this)">
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <h2 class="product-title">Sg Terompet Vault 53, Emote 16 Animasi 1 Rank Cs Bintang 100</h2>
+      <div class="product-price">Rp 120.000</div>
+      <div class="product-views">Dilihat 44 kali</div>
+
+      <div class="account-details">
+        <div class="detail-row">
+          <span class="detail-label">🎮 Game</span>
+          <span class="detail-value">Garena Free Fire</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">🏆 Rank Cs</span>
+          <span class="detail-value">Granda Master</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">⚔️ Jumlah Vault</span>
+          <span class="detail-value">53</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">🎨 Jumlah Emote</span>
+          <span class="detail-value">16</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">🔐 Login Akun</span>
+          <span class="detail-value">Google</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">💰 Total</span>
+          <span class="detail-value">Rp 120.000</span>
+        </div>
+      </div>
+
+      <div class="description">
+        <strong>📌 Deskripsi:</strong><br>
+        DETAIL ⬇️
+LOGIN : Google
+LEVEL AKUN : 53
+SG : Terompet,Mambah,Bunyy
+VAULT: 53 gagah
+EMOTE : 14 keren-keren
+ANIMASI : 1 ikan koi
+KATANA : Loby 1
+TAS : 11 kelinci biru
+SKIN SENJATA : 68
+
+- BERGARANSI 30 HARI ✅
+- BISA NEGO DIKIT
+- PENGIRIMAN CEPAT JIKA KAMI ONLINE JIKA KAMI TIDAK ADA RESPON HARAP SABAR!! ON HANYA JAM 10.00-23.00
+- TIDAK ADA MINUS
+
+[ STOK CUMA 1 SIAPA CEPAT DIA DAPET ‼️ ]
+
+TERIMAKASIH GAS DI ORDER SEKARANG 😋😁
+
+FF-67
+      </div>
+    </div>
+
+    <!-- Tombol Beli Sekarang (Ke Halaman Lain) -->
+    <a href="https://lynk.id/wanxxgames/v1ymm7kvj6wx/checkout" class="buy-btn">
+      <i class="fas fa-shopping-cart"></i> Beli Sekarang
+    </a>
+
+    <!-- Tombol MAU NEGO (Ke WhatsApp) -->
+    <a href="https://wa.me/6283134115994" class="nego-btn" target="_blank">
+      <i class="fas fa-comments"></i> MAU NEGO?
+    </a>
+
+    <!-- Footer -->
+    <footer>
+      © 2025 <strong>WANXX GAMES</strong>. Semua akun diverifikasi. 
+      <br>
+      Butuh bantuan? <a href="https://wa.me/6283134115994" target="_blank">Chat via WhatsApp</a>
+    </footer>
+  </div>
+
+  <script>
+    function changeMainImage(el) {
+      const src = el.src.trim();
+      document.getElementById("mainImage").src = src;
+      
+      document.querySelectorAll(".gallery img").forEach(img => {
+        img.classList.remove("active");
+      });
+      el.classList.add("active");
+    }
+  </script>
+</body>
+</html>
